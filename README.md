@@ -39,8 +39,8 @@ This is why you'd want to use Pro version. In Pro version you can disassemble Sh
 
 To summarize, it's recommended to create and keep your own recovery image with dd in case anything goes wrong.
 
-*** **MAKE SURE YOU UNDERSTAND THE RISK OF DD COMMAND.***  
-*** **THIS CANNOT ONLY BRICK SHIELD TV BUT ALSO WIPE OUT THE HOST COMPUTER***  
+***MAKE SURE YOU UNDERSTAND THE RISK OF DD COMMAND.**  
+***THIS CANNOT ONLY BRICK SHIELD TV BUT ALSO WIPE OUT THE HOST COMPUTER**  
 When you do dd, it is wise to work on secondary computer if possible and make sure you unplug everything else, other than target HDD.  
 
 See following link for dd example command.  
