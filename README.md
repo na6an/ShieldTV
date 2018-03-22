@@ -55,9 +55,9 @@ See this link for the guide on partial backup/HDD migration.
 [https://forum.xda-developers.com/shield-tv/general/guide-migrate-to-ssd-hdd-size-satv-pro-t3440195](https://forum.xda-developers.com/shield-tv/general/guide-migrate-to-ssd-hdd-size-satv-pro-t3440195)
 
 ### Flashing L4T
-You can find the L4T flashing guide here:
-[https://forum.xda-developers.com/shield-tv/general/build-kernel-source-boot-to-ubuntu-t3274632](https://forum.xda-developers.com/shield-tv/general/build-kernel-source-boot-to-ubuntu-t3274632)
-L4T 24.2.1 is the latest version known to be working.
+You can find the L4T flashing guide here:  
+[https://forum.xda-developers.com/shield-tv/general/build-kernel-source-boot-to-ubuntu-t3274632](https://forum.xda-developers.com/shield-tv/general/build-kernel-source-boot-to-ubuntu-t3274632)  
+L4T 24.2.1 is the latest version known to be working.  
 28+ versions could be flashed but with many problems according to many others already tried.
 
 Also, you may need a little improvise after understanding the overall procedure.  
