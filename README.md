@@ -16,9 +16,9 @@ The purpose of this doc is to keep every relevant info in one place, rather than
 1. Nvidia Shield TV
  - ***It is recommended to use "Pro version" (500GB)*** although it's more expensive than two other versions (original and 2017 version). This version is not only has bigger size but less vulnerable of getting bricked if anything goes wrong. Read "Warning/Backup" section for more detail.
  I already hard bricked two non-pro versions during this project and had to return.
-2. If it's "Pro" version, you might want to buy OTG. Although there are multiple USB ports, it appears micro USB works better than other ports and there is only one micro USB ports. I experienced dropping signal or simply not detecting a device at all on other ports while micro USB could.
-3. You might also want to get a USB splitter port like this one for the same reason you need OTG. You may need more than one USB ports for mouse/keyboard dongles, external HDD, USB, etc, but there's only one micro USB.
-[https://www.amazon.com/Belkin-USB-2-0-4-Port-Ultra-Mini/dp/B000Q8UAWY/ref=sr_1_3?s=electronics&ie=UTF8&qid=1521745133&sr=1-3&keywords=belkin+usb+4+port](https://www.amazon.com/Belkin-USB-2-0-4-Port-Ultra-Mini/dp/B000Q8UAWY/ref=sr_1_3?s=electronics&ie=UTF8&qid=1521745133&sr=1-3&keywords=belkin+usb+4+port)
+2. If it's "Pro" version, you might want to buy OTG. Although there are multiple USB ports, it appears micro USB works better than other ports and there is only one micro USB port. I experienced dropping signal or simply not detecting a device at all on other ports while micro USB could.
+3. You might also want to get a USB splitter port like this one for the same reason you need OTG. You may need more than one USB port for mouse/keyboard dongles, external HDD, USB, etc, but there's only one micro USB.
+[https://www.amazon.com/Belkin-USB-2-0-4-Port-Ultra-Mini/dp/B000Q8UAWY/ref=sr_1_3?s=electronics&ie=UTF8&qid=1521745133&sr=1-3&keywords=belkin+usb+4+port](https://www.amazon.com/Belkin-USB-2-0-4-Port-Ultra-Mini/dp/B000Q8UAWY/ref=sr_1_3?s=electronics&ie=UTF8&qid=1521745133&sr=1-3&keywords=belkin+usb+4+port)  
 This is one I have and confirmed to work. However, it's pretty old and expensive (I bought it at $10). You'd want to look for a better, newer model.
 4. Host computer with Linux
 
@@ -40,7 +40,7 @@ This is why you'd want to use Pro version. In Pro version you can disassemble Sh
 To summarize, it's recommended to create and keep your own recovery image with dd in case anything goes wrong.
 
 *****MAKE SURE YOU UNDERSTAND THE RISK OF DD COMMAND.**  
-*****THIS CANNOT ONLY BRICK SHIELD TV BUT ALSO WIPE OUT THE HOST COMPUTER**  
+*****THIS COULD NOT ONLY BRICK A SHIELD TV BUT ALSO WIPE OUT THE HOST COMPUTER**  
 When you do dd, it is wise to work on secondary computer if possible and make sure you unplug everything else, other than target HDD.  
 
 See following link for dd example command.  
