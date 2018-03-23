@@ -33,7 +33,9 @@ Every Nvidia device, just like JetsonTX1, including Nvidia Shield TV, is built i
 There are soft brick and hard brick.
 You can recover soft brick with flashing OS image through adb/fastboot. There is a guide to flashing stock OS image in the link to the rooting guide provided above, too.
 
-For hard brick, dd is the only option to recover hard bricked Shield TV as far as I know. Even HDD cloning with docking station didn't work on my case.
+For hard brick, nvflash could be an option if it's in APX mode. (Personally havn't tried)  
+[https://forum.xda-developers.com/wiki/APX_mode](https://forum.xda-developers.com/wiki/APX_mode)  
+If not APX mode, dd is probably the only option to recover hard bricked Shield TV as far as I know. Even HDD cloning with docking station didn't work on my case.
 
 This is why you'd want to use Pro version. In Pro version you can disassemble Shield TV and manually recover 500GB sshd with backup image through dd.
 
