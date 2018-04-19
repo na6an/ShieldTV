@@ -16,7 +16,7 @@ So, downsizing this partition to add another partition to 34th or more should be
    ![error](https://github.com/na6an/ShieldTV/blob/master/images/sector%20overlap%20error.png)
 
 
-**Workaround**
+###Workaround
 One way to get around this is to rewrite the partition table using gdisk, create img file of last 10 sectors (secondary gpt) by dd command, then overwite this img on the target hdd you're trying to boot with dd command again.
 
 Following is step-by-step procedure of what I did.  
