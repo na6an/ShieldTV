@@ -40,12 +40,12 @@ dd to create image of internal hdd on external drive. For example, if Shield TV'
 
    This may take really long time if you decide to create backup entire 500GB, and especially from L4T on Shield TV.  
    It takes more than 10 hours for me, so I let it run overnight. I took hdd out because I'm not that patient.
+   
+   Instead, you may also choose to backup fist 6899870 sectors (~3.5GB) which is 31 partitions except 32nd.  
+`dd if=/path-to-disk bs=512 of=/some-path/first31part.bin count=6899870 status=progress`
 
 - If taking out internal hdd, make sure to be careful not damaging any cable when you do. Bottom cover of the shell can be pop out with fingernail or pry opener. I found it easier to begin from the corner closest to the power connector.  
-Of course, you can use flat screw driver if you don't mind damaging the cover. You will need an hdd enclosure or sata to usb cable for this.
-
-- Instead, you may also choose to backup fist 6899870 sectors (~3.5GB) which is 31 partitions except 32nd.  
-`dd if=/path-to-disk bs=512 of=first31part.bin count=6899870 status=progress`
+Of course, you can use flat screw driver if you don't mind damaging the cover. You will need an hdd enclosure or sata to usb cable for this. Once you take the disk out, you can make backup directly from the disk in similar manner.
 
 3. Mount the target image/disk on the host computer, open the mounting with gdisk.  
 In my case, img disk mounting was sdc. `sudo gdisk /dev/sdc`
@@ -84,7 +84,7 @@ You may also manually hex edit values in GPT header without using gdisk, or perh
 The ones I used are HxD (Windows) and Okteta (Linux). Okteta, however, can handle only up to disk size of 2GB.
 
 ### Issue Remained
-Although this will allow to add more partitions, the sda33.img and sda34.img boot files in xda-developers forum didn't work. Booting runs but breaks with some error.  
+Although this will allow to add more partitions, sda33.img and sda34.img boot files in xda-developers forum didn't work. Booting runs but breaks with some error.  
 
 I'm still looking for the solution for this issue. I will update this doc when I find working solution.  
 If anyone know how to boot from 33rd or 34th partition, please let me know.
