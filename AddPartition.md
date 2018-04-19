@@ -9,11 +9,11 @@ There are two softwares can read partially:
 
 2. gdisk (GPT fdisk) - gdisk can read partition 2~33 from backup header. As you can see, 33rd partition is the one that holds most of 500GB storage. (462.5 GiB out of 465.66 GiB)
 
-![table](https://github.com/na6an/ShieldTV/blob/master/images/print%20table.png)
+   ![table](https://github.com/na6an/ShieldTV/blob/master/images/print%20table.png)
 
 So, downsizing this partition to add another partition to 34th or more should be the goal here, but I get this error when I try to resize disk on gdisk directly.
 
-![error](https://github.com/na6an/ShieldTV/blob/master/images/sector%20overlap%20error.png)
+   ![error](https://github.com/na6an/ShieldTV/blob/master/images/sector%20overlap%20error.png)
 
 
 **Workaround**
@@ -30,16 +30,16 @@ If you don't want to go through the hassle, I have last10.bin file uploaded in t
 
 2. Make sure to make a backup img. This isn't optional because this workaround will modify and brick the hdd temporarily. Read "Warning/Backup" part above. I had to reinstall OS on my main computer during figuring out this workaround for using dd carelessly.
 
-I went through so many issues during flashing L4T, so I wanted to be super safe, and backed up entire 500GB on my spare 640GB hdd.
+   I went through so many issues during flashing L4T, so I wanted to be super safe, and backed up entire 500GB on my spare 640GB hdd.
 
-There are 2 ways to do this:
-Work directly on L4T flashed Shield TV, or take out hdd physically.
+   There are 2 ways to do this:
+   Work directly on L4T flashed Shield TV, or take out hdd physically.
 
  - If working on L4T, plug in external drive on the device,
 dd to create image of internal hdd on external drive. For example, if Shield TV's drive path was '/dev/sda' and external drive path was '/dev/sdb', then the command would be something like `dd if=/dev/sda of=/dev/sdbb/backup.img bs=4MB status=progress`
 
-This may take really long time if you decide to create backup entire 500GB, and especially from L4T on Shield TV.  
-It takes more than 10 hours for me, so I let it run overnight. I took hdd out because I'm not that patient.
+   This may take really long time if you decide to create backup entire 500GB, and especially from L4T on Shield TV.  
+   It takes more than 10 hours for me, so I let it run overnight. I took hdd out because I'm not that patient.
 
 - If taking out internal hdd, make sure to be careful not damaging any cable when you do. Bottom cover of the shell can be pop out with fingernail or pry opener. I found it easier to begin from the corner closest to the power connector.  
 Of course, you can use flat screw driver if you don't mind damaging the cover. You will need an hdd enclosure or sata to usb cable for this.
@@ -50,7 +50,7 @@ Of course, you can use flat screw driver if you don't mind damaging the cover. Y
 3. Mount the target image/disk on the host computer, open the mounting with gdisk.  
 In my case, img disk mounting was sdc. `sudo gdisk /dev/sdc`
 
-![gdisk](https://github.com/na6an/ShieldTV/blob/master/images/gdisk.png)
+   ![gdisk](https://github.com/na6an/ShieldTV/blob/master/images/gdisk.png)
 
 4. Rewrite partition table manually one by one base on the partition info above.  
 
