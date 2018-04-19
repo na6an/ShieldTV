@@ -5,9 +5,9 @@ Here are list of disk paritioning software I tried and couldn't even read the di
 
 There are two softwares can read partially:
 
-1. GNOME Disks - the default partition software for Ubuntu, however, could read the partitions IF you boot L4T from Shield TV. It won't work if you try from another computer. Also, it is still unable to modify partitions.
+- GNOME Disks - the default partition software for Ubuntu, however, could read the partitions IF you boot L4T from Shield TV. It won't work if you try from another computer. Also, it is still unable to modify partitions.
 
-2. gdisk (GPT fdisk) - gdisk can read partition 2~33 from backup header. As you can see, 33rd partition is the one that holds most of 500GB storage. (462.5 GiB out of 465.66 GiB)
+- gdisk (GPT fdisk) - gdisk can read partition 2~33 from backup header. As you can see, 33rd partition is the one that holds most of 500GB storage. (462.5 GiB out of 465.66 GiB)
 
    ![table](https://github.com/na6an/ShieldTV/blob/master/images/print%20table.png)
 
@@ -35,17 +35,17 @@ If you don't want to go through the hassle, I have last10.bin file uploaded in t
    There are 2 ways to do this:
    Work directly on L4T flashed Shield TV, or take out hdd physically.
 
- - If working on L4T, plug in external drive on the device,
-dd to create image of internal hdd on external drive. For example, if Shield TV's drive path was '/dev/sda' and external drive path was '/dev/sdb', then the command would be something like `dd if=/dev/sda of=/dev/sdbb/backup.img bs=4MB status=progress`
+    - If working on L4T, plug in external drive on the device,
+   dd to create image of internal hdd on external drive. For example, if Shield TV's drive path was '/dev/sda' and external drive path was '/dev/sdb', then the command would be something like `dd if=/dev/sda of=/dev/sdbb/backup.img bs=4MB status=progress`
 
-   This may take really long time if you decide to create backup entire 500GB, and especially from L4T on Shield TV.  
-   It takes more than 10 hours for me, so I let it run overnight. I took hdd out because I'm not that patient.
-   
-   Instead, you may also choose to backup fist 6899870 sectors (~3.5GB) which is 31 partitions except 32nd.  
-`dd if=/path-to-disk bs=512 of=/some-path/first31part.bin count=6899870 status=progress`
+      This may take really long time if you decide to create backup entire 500GB, and especially from L4T on Shield TV.  
+      It takes more than 10 hours for me, so I let it run overnight. I took hdd out because I'm not that patient.
 
-- If taking out internal hdd, make sure to be careful not damaging any cable when you do. Bottom cover of the shell can be pop out with fingernail or pry opener. I found it easier to begin from the corner closest to the power connector.  
-Of course, you can use flat screw driver if you don't mind damaging the cover. You will need an hdd enclosure or sata to usb cable for this. Once you take the disk out, you can make backup directly from the disk in similar manner.
+      Instead, you may also choose to backup fist 6899870 sectors (~3.5GB) which is 31 partitions except 32nd.  
+   `dd if=/path-to-disk bs=512 of=/some-path/first31part.bin count=6899870 status=progress`
+
+   - If taking out internal hdd, make sure to be careful not damaging any cable when you do. Bottom cover of the shell can be pop out with fingernail or pry opener. I found it easier to begin from the corner closest to the power connector.  
+   Of course, you can use flat screw driver if you don't mind damaging the cover. You will need an hdd enclosure or sata to usb cable for this. Once you take the disk out, you can make backup directly from the disk in similar manner.
 
 3. Mount the target image/disk on the host computer, open the mounting with gdisk.  
 In my case, img disk mounting was sdc. `sudo gdisk /dev/sdc`
@@ -54,15 +54,15 @@ In my case, img disk mounting was sdc. `sudo gdisk /dev/sdc`
 
 4. Rewrite partition table manually one by one base on the partition info above.  
 
- - Delete existing table: select o, create a new empty GUID partition table (GPT), then y
- - Set alignment value to 1: select x, l, 1
- - Go back to main command and add partition: select m, n, partition #, fist sector #, last sector #, and file system hex code 0700  
-*gdisk doesn't read the first partition, but I added first partition info as well.
- - Repeat previous step until partition 31.
- - For 32nd and later, select file system hex code 8300 to be able to read from L4T. Make sure to select lesser number than original for last sector of 32nd partition. Original last sector of 32nd partition should be the last sector of 34 (or whatever the last partition). I want to keep 32nd partition as before, to be able to boot Shield TV content, boot L4T from 33rd and use 34th as data storage. So, this is how I allocated.
+    - Delete existing table: select o, create a new empty GUID partition table (GPT), then y
+    - Set alignment value to 1: select x, l, 1
+    - Go back to main command and add partition: select m, n, partition #, fist sector #, last sector #, and file system hex code 0700  
+   *gdisk doesn't read the first partition, but I added first partition info as well.
+    - Repeat previous step until partition 31.
+    - For 32nd and later, select file system hex code 8300 to be able to read from L4T. Make sure to select lesser number than original for last sector of 32nd partition. Original last sector of 32nd partition should be the last sector of 34 (or whatever the last partition). I want to keep 32nd partition as before, to be able to boot Shield TV content, boot L4T from 33rd and use 34th as data storage. So, this is how I allocated.
 
- - Just in case, I also changed every partition's name to match to the original partition: select c
- - Once all done, save to the disk: select w
+    - Just in case, I also changed every partition's name to match to the original partition: select c
+    - Once all done, save to the disk: select w
 
 5. Now create binary img file of last 10 sectors from the disk we just worked on using dd command like this.  
 `dd if=/path-to-disk bs=512 skip=976773158 of=last10.bin status=progress`  
