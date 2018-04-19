@@ -38,13 +38,17 @@ Work directly on L4T flashed Shield TV, or take out hdd physically.
  - If working on L4T, plug in external drive on the device,
 dd to create image of internal hdd on external drive. For example, if Shield TV's drive path was '/dev/sda' and external drive path was '/dev/sdb', then the command would be something like `dd if=/dev/sda of=/dev/sdbb/backup.img bs=4MB status=progress`
 
-This may take really long time if you decide to create backup entire 500GB, and especially from L4T on Shield TV. It takes more than 10 hours for me, so I let it run overnight. I took hdd out because I'm not that patient.
+This may take really long time if you decide to create backup entire 500GB, and especially from L4T on Shield TV.  
+It takes more than 10 hours for me, so I let it run overnight. I took hdd out because I'm not that patient.
 
-- If taking out internal hdd, make sure to be careful not damaging any cable when you do. Bottom cover of the shell can be pop out with fingernail or pry opener. I found it easier to begin from the corner closest to the power connector. Of course, you can use flat screw driver if you don't mind damaging the cover. You will need an hdd enclosure or sata to usb cable for this.
+- If taking out internal hdd, make sure to be careful not damaging any cable when you do. Bottom cover of the shell can be pop out with fingernail or pry opener. I found it easier to begin from the corner closest to the power connector.  
+Of course, you can use flat screw driver if you don't mind damaging the cover. You will need an hdd enclosure or sata to usb cable for this.
 
-- Instead, you may also choose to backup fist 6899870 sectors (~3.5GB) which is 31 partitions except 32nd. `dd if=/path-to-disk bs=512 of=first31part.bin count=6899870 status=progress`
+- Instead, you may also choose to backup fist 6899870 sectors (~3.5GB) which is 31 partitions except 32nd.  
+`dd if=/path-to-disk bs=512 of=first31part.bin count=6899870 status=progress`
 
-3. Mount the target image/disk on the host computer, open the mounting with gdisk. In my case, img disk mounting was sdc.
+3. Mount the target image/disk on the host computer, open the mounting with gdisk.  
+In my case, img disk mounting was sdc.
 
 picture:gdisk
 
@@ -60,13 +64,19 @@ picture:gdisk
  - Just in case, I also changed every partition's name to match to the original partition: select c
  - Once all done, save to the disk: select w
 
-5. Now create binary img file of last 10 sectors from the disk we just worked on using dd command like this `dd if=/path-to-disk bs=512 skip=976773158 of=last10.bin status=progress` The number 976773158 is assuming it's 500GB disk. If you have different size of disk, this number should be changed, too. 
+5. Now create binary img file of last 10 sectors from the disk we just worked on using dd command like this.  
+`dd if=/path-to-disk bs=512 skip=976773158 of=last10.bin status=progress`  
+The number 976773158 is assuming it's 500GB disk. If you have different size of disk, this number should be changed, too. 
 
-6. Now, the disk we modified using gdisk is unusable in Shield TV. Recover from backup img we created from step 2. `dd if=/path-to-backup/backup.img of=/path-to-target bs=4MB status=progress`
+6. Now, the disk we modified using gdisk is unusable in Shield TV. Recover from backup img we created from step 2.  
+`dd if=/path-to-backup/backup.img of=/path-to-target bs=4MB status=progress`
 
-7. Finally, overwite last 10 sectors with the binary img just created in step 5. `dd if=/path-to-last10/last10.bin of=/path-to-target bs=512 seek=976773158 status=progress`
+7. Finally, overwite last 10 sectors with the binary img just created in step 5.  
+`dd if=/path-to-last10/last10.bin of=/path-to-target bs=512 seek=976773158 status=progress`
 
-8. It's all done. Now, if you want Sheild TV android and did step 1, copy contents back. `sudo cp -a /path-to-32nd-partition-copy-files/* /path-to-resized-32nd-partition/`This might have to be done in L4T.
+8. It's all done. Now, if you want Sheild TV android and did step 1, copy contents back.  
+`sudo cp -a /path-to-32nd-partition-copy-files/* /path-to-resized-32nd-partition/`  
+This might have to be done in L4T.
 
 ### Alternative Method
 You may also manually hex edit values in GPT header without using gdisk, or perhapds even without dd by editing directly in L4T. In order to do this, you need hex editor with CRC-32 checksum capability. 
