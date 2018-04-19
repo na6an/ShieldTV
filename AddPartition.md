@@ -76,4 +76,5 @@ The ones I used are HxD (Windows) and Okteta (Linux). Okteta, however, can handl
 ### Issue Remained
 Although this will allow to add more partitions, the sda33.img and sda34.img boot files in xda-developers forum didn't work. Booting runs but breaks with some error.  
 
-I'm still looking for the solution for this issue. I will update this doc when I find working solution. If anyone know how to boot from 33rd or 34th partition, please let me know.
+I'm still looking for the solution for this issue. I will update this doc when I find working solution.  
+If anyone know how to boot from 33rd or 34th partition, please let me know.
