@@ -9,11 +9,11 @@ There are two softwares can read partially:
 
 2. gdisk (GPT fdisk) - gdisk can read partition 2~33 from backup header. As you can see, 33rd partition is the one that holds most of 500GB storage. (462.5 GiB out of 465.66 GiB)
 
-picture: print table
+![table](https://github.com/na6an/ShieldTV/blob/master/images/print%20table.png)
 
 So, downsizing this partition to add another partition to 34th or more should be the goal here, but I get this error when I try to resize disk on gdisk directly.
 
-picture:error
+![error](https://github.com/na6an/ShieldTV/blob/master/images/sector%20overlap%20error.png)
 
 
 **Workaround**
@@ -48,9 +48,9 @@ Of course, you can use flat screw driver if you don't mind damaging the cover. Y
 `dd if=/path-to-disk bs=512 of=first31part.bin count=6899870 status=progress`
 
 3. Mount the target image/disk on the host computer, open the mounting with gdisk.  
-In my case, img disk mounting was sdc.
+In my case, img disk mounting was sdc. `sudo gdisk /dev/sdc`
 
-picture:gdisk
+![gdisk](https://github.com/na6an/ShieldTV/blob/master/images/gdisk.png)
 
 4. Rewrite partition table manually one by one base on the partition info above.  
 
