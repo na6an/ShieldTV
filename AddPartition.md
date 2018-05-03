@@ -15,7 +15,6 @@ So, downsizing this partition to add another partition to 34th or more should be
 
    ![error](https://github.com/na6an/ShieldTV/blob/master/images/sector%20overlap%20error.png)
 
-
 ### Workaround  
 One way to get around this is to rewrite the partition table using gdisk, create img file of last 10 sectors (secondary gpt) by dd command, then overwite this img on the target hdd you're trying to boot with dd command again.
 
@@ -23,7 +22,8 @@ Following is step-by-step procedure of what I did.
 Make sure you fully understand this hdd migration guide.  
 [https://forum.xda-developers.com/shield-tv/general/guide-migrate-to-ssd-hdd-size-satv-pro-t3440195](https://forum.xda-developers.com/shield-tv/general/guide-migrate-to-ssd-hdd-size-satv-pro-t3440195)
 
-If you don't want to go through the hassle, I have last10.bin file uploaded in this dir. With that, you can skip step 3, 4, 5, 6.
+If you don't want to go through the hassle, I have last10.bin file uploaded in this dir.  
+With that, you can skip step 3, 4, 5, 6.
 
 1. Copy 32nd partition files into somewhere if you want to dual boot original Shield TV android software and L4T.  
 `sudo cp -a /path-to-32nd-partition/* /path-to-target`
@@ -60,6 +60,8 @@ In my case, img disk mounting was sdc. `sudo gdisk /dev/sdc`
    *gdisk doesn't read the first partition, but I added first partition info as well.
     - Repeat previous step until partition 31.
     - For 32nd and later, select file system hex code 8300 to be able to read from L4T. Make sure to select lesser number than original for last sector of 32nd partition. Original last sector of 32nd partition should be the last sector of 34 (or whatever the last partition). I want to keep 32nd partition as before, to be able to boot Shield TV content, boot L4T from 33rd and use 34th as data storage. So, this is how I allocated.
+    
+   ![done2](https://github.com/na6an/ShieldTV/blob/master/images/done2.png)
 
     - Just in case, I also changed every partition's name to match to the original partition: select c
     - Once all done, save to the disk: select w
@@ -78,10 +80,14 @@ The number 976773158 is assuming it's 500GB disk. If you have different size of 
 `sudo cp -a /path-to-32nd-partition-copy-files/* /path-to-resized-32nd-partition/`  
 This might have to be done in L4T.
 
-### Alternative Method
-You may also manually hex edit values in GPT header without using gdisk, or perhapds even without dd by editing directly in L4T. In order to do this, you need hex editor with CRC-32 checksum capability. 
+Notice that 32nd partition is still reserved for the Shield software.
+This is how it appears on the system.
+   ![screen](https://github.com/na6an/ShieldTV/blob/master/images/screen.png)
 
-The ones I used are HxD (Windows) and Okteta (Linux). Okteta, however, can handle only up to disk size of 2GB.
+### Alternative Method
+You may also manually hex edit values in GPT header without using gdisk, or perhapds even without dd by editing directly in L4T. In order to do this, you need hex editor with CRC-32 checksum capability.  
+
+The ones I used are HxD (Windows) and Okteta (Linux). Okteta, however, can handle only up to disk size of 2GB.  
 
 ### Issue Remained
 Although this will allow to add more partitions, sda33.img and sda34.img boot files in xda-developers forum didn't work. Booting runs but breaks with some error.  
